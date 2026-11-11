@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geethanjali Pulagam · Gold 3D</title>
+<meta name="description" content="Geethanjali Pulagam - Commercial Agent - Europe (AI Research &amp; Automation). International crop protection sales and AI automation.">
+<style>body{margin:0}img{max-width:100%}</style>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark-first; a sticky profile rail on the left, content on the right; workflow "nodes" as the signature motif */
+:root{
+  --bg:#0f1420; --panel:#161d2d; --panel2:#1c2538; --fg:#eef1f7; --muted:#9aa5bb; --line:#27324a;
+  --accent:#f2b544; --accent2:#7cc7ff; --accent-soft:rgba(242,181,68,.12);
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f6f4ef; --panel:#ffffff; --panel2:#f0ede5; --fg:#151a26; --muted:#5b6476; --line:#e0dbcf;
+  --accent:#b9770e; --accent2:#1f6fb2; --accent-soft:rgba(185,119,14,.10); color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f6f4ef; --panel:#ffffff; --panel2:#f0ede5; --fg:#151a26; --muted:#5b6476; --line:#e0dbcf;
+  --accent:#b9770e; --accent2:#1f6fb2; --accent-soft:rgba(185,119,14,.10); color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.shell{max-width:1120px;margin:0 auto;padding-block:40px 64px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;align-items:start}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent2)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.tag{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
+/* rail */
+.rail{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:18px}
+.avatar{width:120px;aspect-ratio:1;border-radius:22px;overflow:hidden;border:2px solid var(--accent);max-width:100%}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.rail h1{font-size:2rem;font-weight:800;letter-spacing:-.01em}
+.rail .role{color:var(--muted);font-size:.95rem}
+.status{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);color:var(--fg);background:var(--accent-soft);padding:8px 10px;border-radius:999px;width:max-content}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:.9rem;color:var(--muted)}
+.facts b{color:var(--fg);font-weight:500}
+.contact{display:flex;flex-direction:column;gap:8px}
+.email{font:500 13px/1.3 var(--mono);user-select:all;padding:10px 12px;border:1px dashed var(--line);border-radius:10px;word-break:break-all}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:600 14px/1 var(--body);padding:11px 14px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#1a1405;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+
+/* main */
+main{display:flex;flex-direction:column;gap:56px;min-width:0}
+.hero{display:flex;flex-direction:column;gap:18px}
+.hero h2{font-size:clamp(2.2rem,5.2vw,3.8rem);font-weight:800;letter-spacing:-.02em}
+.hero h2 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);max-width:60ch;font-size:1.05rem}
+
+/* workflow graph */
+.graph{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;overflow-x:auto}
+.graph svg{display:block;width:100%;min-width:560px;height:auto}
+.graph .cap{font:400 12px/1.4 var(--mono);color:var(--muted);margin-top:10px}
+
+section{display:flex;flex-direction:column;gap:20px}
+section>h3{font-size:1.6rem;font-weight:700}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h4{font:700 1.05rem/1.25 var(--display);margin:0}
+.card p{color:var(--muted);font-size:.93rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{font:400 12px/1 var(--mono);padding:7px 9px;border-radius:8px;background:var(--panel2);border:1px solid var(--line)}
+
+.stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.stack .card h4{font-size:.95rem;font-family:var(--mono);font-weight:500;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+
+.tl{display:flex;flex-direction:column;gap:14px}
+.item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.when{font:500 12px/1.5 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.when b{display:block;color:var(--accent);font-weight:500}
+.item h4{font:700 1.1rem/1.25 var(--display);margin:0}
+.item .org{color:var(--muted);font-size:.92rem;margin-top:2px}
+.item ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:.94rem}
+
+footer{color:var(--muted);font:400 12px/1 var(--mono)}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:28px;padding-block:24px 48px}
+  .rail{position:static}
+  .grid3{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .stack{grid-template-columns:1fr}
+  .item{grid-template-columns:1fr;gap:8px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .flow-dot{animation:move 3.2s linear infinite}
+  @keyframes move{from{offset-distance:0%}to{offset-distance:100%}}
+}
+
+/* ---------- 3D LAYER ---------- */
+html,body{overflow-x:clip}
+.nb{white-space:nowrap}
+.hero,.hero p,.hero h2{text-align:left}
+.hero p{max-width:62ch;text-wrap:pretty}
+.hero p{text-shadow:0 1px 12px var(--bg),0 0 2px var(--bg)}
+#space{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+.shell{position:relative;z-index:1}
+.rail,.card,.graph{transform-style:preserve-3d;will-change:transform}
+.rail{box-shadow:0 40px 80px -40px rgba(0,0,0,.55)}
+.rail .avatar{transform:translateZ(40px);box-shadow:0 18px 30px -12px rgba(0,0,0,.5)}
+.rail h1{transform:translateZ(28px)}
+.rail .status,.rail .btns{transform:translateZ(18px)}
+.rail h1{text-shadow:1px 1px 0 var(--line),2px 2px 0 var(--line),3px 3px 0 var(--line),4px 4px 0 var(--line),6px 8px 14px rgba(0,0,0,.35)}
+.hero h2 em{text-shadow:1px 1px 0 color-mix(in srgb,var(--accent) 55%,var(--bg)),2px 2px 0 color-mix(in srgb,var(--accent) 45%,var(--bg)),3px 3px 0 color-mix(in srgb,var(--accent) 35%,var(--bg)),4px 4px 0 color-mix(in srgb,var(--accent) 25%,var(--bg)),6px 10px 18px rgba(0,0,0,.3)}
+.card{position:relative;overflow:hidden}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),var(--accent-soft),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::after{opacity:1}
+.card h4{transform:translateZ(22px)}
+.graph svg rect{transition:transform .4s}
+.graph .flow{stroke-dasharray:5 6;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-22}}
+.tl .item{transform-style:preserve-3d}
+.d3-in{transform-origin:50% 0%}
+@media (prefers-reduced-motion:reduce){.graph .flow{animation:none}}
+</style>
+</head>
+<body>
+
+
+<canvas id="space" aria-hidden="true"></canvas>
+<div class="shell">
+  <aside class="rail">
+    <div class="avatar"><img src="data:image/jpeg;base64,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" alt="Geethanjali Pulagam"></div>
+    <div>
+      <span class="tag">Portfolio</span>
+      <h1>Geethanjali Pulagam</h1>
+      <p class="role">Commercial Agent – Europe (AI Research &amp; Automation) at <span class="nb">Sharda Cropchem Ltd</span></p>
+    </div>
+    <span class="status">Spain · Remote</span>
+    <ul class="facts">
+      <li><b>Focus</b> · International crop protection sales, AI automation</li>
+      <li><b>Tools</b> · n8n, Power Automate, Python</li>
+      <li><b>Education</b> · MBA, B.Sc. Computer Applications</li>
+    </ul>
+    <div class="contact">
+      <span class="email" id="email">pulagamgeethanjali@gmail.com</span>
+      <div class="btns">
+        <button class="btn" id="copy" type="button">Copy email</button>
+        <a class="btn ghost" href="https://www.linkedin.com/in/geethanjali-pulagam/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <span class="tag">Crop protection · AI automation</span>
+      <h2>Commercial work in crop protection, <em>powered by AI.</em></h2>
+      <p>As Commercial Agent – Europe (AI Research &amp; Automation) for <span class="nb">Sharda Cropchem Ltd</span>, I support the commercialisation of a crop protection portfolio across Europe, and I build AI agents and automated workflows with n8n, Microsoft Power Automate and Python that make commercial and reporting work faster.</p>
+    </header>
+
+    <div class="graph" aria-label="How an automation I build runs, from trigger to result">
+      <svg viewBox="0 0 760 170" role="img">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+        </defs>
+        <g font-family="IBM Plex Mono, monospace" font-size="12">
+          <g><rect x="10" y="55" width="120" height="60" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="70" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">Trigger</text><text x="70" y="100" text-anchor="middle" fill="var(--muted)">new task</text></g>
+          <g><rect x="160" y="55" width="130" height="60" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="225" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">n8n / Power</text><text x="225" y="100" text-anchor="middle" fill="var(--muted)">Automate flow</text></g>
+          <g><rect x="320" y="20" width="130" height="56" rx="12" fill="var(--panel2)" stroke="var(--accent2)"/><text x="385" y="45" text-anchor="middle" fill="var(--fg)" font-weight="500">AI agent</text><text x="385" y="62" text-anchor="middle" fill="var(--muted)">Claude · Copilot</text></g>
+          <g><rect x="320" y="96" width="130" height="56" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="385" y="121" text-anchor="middle" fill="var(--fg)" font-weight="500">Python</text><text x="385" y="138" text-anchor="middle" fill="var(--muted)">data step</text></g>
+          <g><rect x="480" y="55" width="120" height="60" rx="12" fill="var(--accent-soft)" stroke="var(--accent)"/><text x="540" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">QA check</text><text x="540" y="100" text-anchor="middle" fill="var(--muted)">vs requirements</text></g>
+          <g><rect x="630" y="55" width="120" height="60" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="690" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">Result</text><text x="690" y="100" text-anchor="middle" fill="var(--muted)">ready to use</text></g>
+          <g class="flows" stroke="var(--muted)" stroke-width="1.5" fill="none" marker-end="url(#ar)">
+            <path class="flow" d="M130 85 H158"/>
+            <path class="flow" d="M290 78 C305 78 305 48 318 48"/>
+            <path class="flow" d="M290 92 C305 92 305 124 318 124"/>
+            <path class="flow" d="M450 48 C465 48 465 78 478 78"/>
+            <path class="flow" d="M450 124 C465 124 465 92 478 92"/>
+            <path class="flow" d="M600 85 H628"/>
+          </g><g class="dots"><circle r="3.5" fill="var(--accent)"><animateMotion dur="1.60s" begin="0.00s" repeatCount="indefinite" path="M130 85 H158"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="1.75s" begin="0.35s" repeatCount="indefinite" path="M290 78 C305 78 305 48 318 48"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="1.90s" begin="0.70s" repeatCount="indefinite" path="M290 92 C305 92 305 124 318 124"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="2.05s" begin="1.05s" repeatCount="indefinite" path="M450 48 C465 48 465 78 478 78"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="2.20s" begin="1.40s" repeatCount="indefinite" path="M450 124 C465 124 465 92 478 92"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="2.35s" begin="1.75s" repeatCount="indefinite" path="M600 85 H628"/></circle></g>
+        </g>
+      </svg>
+      <p class="cap">A typical flow: a workflow tool runs AI and Python steps, and nothing ships until the QA check passes.</p>
+    </div>
+
+    <section>
+      <span class="tag">What I do</span>
+      <h3>What I bring to a team</h3>
+      <div class="grid3">
+        <article class="card"><h4>Workflow automation</h4><p>Turning repetitive, multi-step tasks into automated workflows that connect tools, data and AI steps.</p><div class="chips"><span class="chip">n8n</span><span class="chip">Power Automate</span><span class="chip">Python</span></div></article>
+        <article class="card"><h4>Generative AI &amp; prompts</h4><p>Designing and testing prompts until AI outputs are accurate, consistent and ready for business use.</p><div class="chips"><span class="chip">Claude AI</span><span class="chip">Copilot</span><span class="chip">Perplexity AI</span><span class="chip">Google Search</span><span class="chip">Wikipedia</span><span class="chip">AI agents</span></div></article>
+        <article class="card"><h4>Commercial &amp; business development</h4><p>Supporting sales of a crop protection portfolio across Europe: customers, orders, budgets and work plans.</p><div class="chips"><span class="chip">International sales</span><span class="chip">Business development</span><span class="chip">Crop protection</span><span class="chip">Europe</span></div></article>
+      </div>
+    </section>
+
+    <section>
+      <span class="tag">Toolkit</span>
+      <h3>Skills by area</h3>
+      <div class="stack">
+        <div class="card" style="grid-column:1/-1"><h4>Commercial</h4><div class="chips"><span class="chip">International sales</span><span class="chip">Business development</span><span class="chip">Crop protection</span><span class="chip">Customer relationship management</span><span class="chip">European market</span></div></div>
+        <div class="card" style="grid-column:1/-1"><h4>GenAI tools</h4><div class="chips"><span class="chip">Claude AI</span><span class="chip">Microsoft Copilot</span><span class="chip">Perplexity AI</span></div></div>
+        <div class="card"><h4>AI / GenAI</h4><div class="chips"><span class="chip">Generative AI</span><span class="chip">Prompt engineering</span><span class="chip">AI agents</span><span class="chip">Claude AI</span><span class="chip">Microsoft Copilot</span><span class="chip">Perplexity AI (research)</span><span class="chip">Google Search (research)</span><span class="chip">Wikipedia (study &amp; research)</span></div></div>
+        <div class="card"><h4>Digital tools &amp; AI</h4><div class="chips"><span class="chip">n8n</span><span class="chip">Microsoft Power Automate</span><span class="chip">Workflow automation</span></div></div>
+        <div class="card"><h4>Programming &amp; dev tools</h4><div class="chips"><span class="chip">Python</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">VS Code</span><span class="chip">GitHub</span><span class="chip">Linux</span><span class="chip">Linux calculations via Parallels Desktop</span></div></div>
+        <div class="card"><h4>Design &amp; media</h4><div class="chips"><span class="chip">Canva</span><span class="chip">Adobe Express</span><span class="chip">Content creation</span><span class="chip">SEO</span></div></div>
+      </div>
+    </section>
+
+    <section>
+      <span class="tag">Experience</span>
+      <h3>Work and internships</h3>
+      <div class="tl">
+        <div class="item"><div class="when"><b>Now</b>Nov 2026 – Present</div><div><h4>Commercial Agent – Europe (AI Research &amp; Automation)</h4><p class="org">Sharda Cropchem Ltd · Spain (Remote)</p><ul><li>Support commercialisation and sales of a crop protection portfolio across Europe: customer visits, orders, delivery and payment follow-up.</li><li>Contribute to annual budgets and work plans with headquarters and customers.</li><li>Research, design and deliver AI-driven projects independently, significantly reducing turnaround time compared with manual processes.</li><li>Develop AI agents and automated workflows that improve efficiency in commercial and reporting tasks.</li></ul></div></div>
+        <div class="item"><div class="when"><b>Internship</b>Feb – Apr 2026</div><div><h4>Sales Associate Intern</h4><p class="org">Trent Limited (Westside) · Chennai</p><ul><li>Assisted customers and supported sales, billing and customer engagement in retail.</li></ul></div></div>
+        <div class="item"><div class="when"><b>Internship</b>Jan – Apr 2024</div><div><h4>Web Development Intern</h4><p class="org">Academic XCELL Solutions · Andhra Pradesh</p><ul><li>Built responsive webpages with HTML, CSS and JavaScript.</li></ul></div></div>
+      </div>
+    </section>
+
+    <section>
+      <span class="tag">Education</span>
+      <h3>Business and technology</h3>
+      <div class="tl">
+        <div class="item"><div class="when"><b>MBA</b>Aug 2024 – May 2026</div><div><h4>Marketing and Technopreneurship</h4><p class="org">Vel Tech University, Chennai · CGPA 8.5 / 10</p></div></div>
+        <div class="item"><div class="when"><b>B.Sc.</b>Aug 2021 – May 2024</div><div><h4>Computer Applications</h4><p class="org">Adikavi Nannaya University, Rajamahendravaram · CGPA 7.89 / 10</p><p class="org">Fields of study: Mathematics and Statistics, Computer Applications</p></div></div>
+      </div>
+    </section>
+
+    <footer>© 2026 Geethanjali Pulagam</footer>
+  </main>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click', async function(){
+  const btn=this, el=document.getElementById('email');
+  try{ await navigator.clipboard.writeText(el.textContent); btn.textContent='Copied'; }
+  catch(e){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selected, press Cmd+C'; }
+  setTimeout(()=>{btn.textContent='Copy email'},2200);
+});
+</script>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root=document.documentElement,fine=matchMedia('(pointer:fine)').matches;
+  // ---------- 3D gold globe network behind the page ----------
+  var cv=document.getElementById('space'),ctx=cv.getContext('2d'),W,H,dpr,P=[],E=[],S=[],pulses=[],C={};
+  var mouse={x:.5,y:.5},yaw=0,pitch=0,spin=0;
+  function col(n){return getComputedStyle(root).getPropertyValue(n).trim()}
+  function readC(){C.a=col('--accent');C.b=col('--accent2');C.m=col('--muted')}
+  function build(){
+    dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=W<760?420:760,ga=Math.PI*(3-Math.sqrt(5));P=[];
+    for(var i=0;i<n;i++){var y=1-(i/(n-1))*2,r=Math.sqrt(1-y*y),t=ga*i;P.push([Math.cos(t)*r,y,Math.sin(t)*r,Math.random()<.07])}
+    // orbit ring (like a satellite path) for extra depth
+    for(var k=0;k<120;k++){var a=k/120*6.283;P.push([Math.cos(a)*1.45,Math.sin(a)*.18,Math.sin(a)*1.45,false,1])}
+    E=[];for(var i2=0;i2<n;i2++)for(var j=i2+1;j<Math.min(n,i2+120);j++){var dx=P[i2][0]-P[j][0],dy=P[i2][1]-P[j][1],dz=P[i2][2]-P[j][2];if(dx*dx+dy*dy+dz*dz<.03)E.push([i2,j])}
+    pulses=[];
+  }
+  readC();build();
+  addEventListener('resize',build);
+  new MutationObserver(readC).observe(root,{attributes:true,attributeFilter:['data-theme']});
+  matchMedia('(prefers-color-scheme: light)').addEventListener('change',readC);
+  addEventListener('pointermove',function(e){mouse.x=e.clientX/innerWidth;mouse.y=e.clientY/innerHeight});
+  function frame(t){
+    t=t||0;var sc=scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    spin=reduce?0:t*.00012;
+    yaw+=((mouse.x-.5)*.9+spin+sc*3.2-yaw)*.06;pitch+=((mouse.y-.5)*.5+.25-pitch)*.06;
+    var cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+    var R=Math.min(W,H)*(W<760?.42:.36),ox=W<760?W*.5:W*(.72-sc*.12),oy=H*(.42+sc*.12),f=3;
+    for(var i=0;i<P.length;i++){var p=P[i],x=p[0]*cy-p[2]*sy,z=p[0]*sy+p[2]*cy,y=p[1]*cp-z*sp,z2=p[1]*sp+z*cp,k=f/(f+z2);S[i]=[ox+x*R*k,oy+y*R*k,z2,k]}
+    ctx.clearRect(0,0,W,H);
+    var fade=W<760?.35:.75;
+    ctx.lineWidth=.6;ctx.strokeStyle=C.a;
+    for(var q=0;q<E.length;q++){var A=S[E[q][0]],B=S[E[q][1]],d=(A[2]+B[2])/2;ctx.globalAlpha=Math.max(0,.34-d*.28)*fade;if(ctx.globalAlpha<.02)continue;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke()}
+    if(!reduce&&E.length&&pulses.length<36&&Math.random()<.3)pulses.push({k:(Math.random()*E.length)|0,t:0,s:.02+Math.random()*.03});
+    for(var u=pulses.length-1;u>=0;u--){var pu=pulses[u];pu.t+=pu.s;if(pu.t>=1){pulses.splice(u,1);continue}var A2=S[E[pu.k][0]],B2=S[E[pu.k][1]];if((A2[2]+B2[2])/2>.2)continue;
+      var px=A2[0]+(B2[0]-A2[0])*pu.t,py=A2[1]+(B2[1]-A2[1])*pu.t;ctx.globalAlpha=fade;ctx.fillStyle=C.b;ctx.shadowColor=C.b;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(px,py,2,0,6.283);ctx.fill();ctx.shadowBlur=0}
+    for(var j2=0;j2<P.length;j2++){var s3=S[j2],pp=P[j2];ctx.globalAlpha=Math.max(.05,.8-s3[2]*.45)*fade;ctx.fillStyle=pp[4]?C.b:(pp[3]?C.b:C.a);ctx.beginPath();ctx.arc(s3[0],s3[1],(pp[3]?2.2:1.2)*s3[3]*(pp[4]?.8:1),0,6.283);ctx.fill()}
+    ctx.globalAlpha=1;
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  if(reduce)return;
+
+  // ---------- 3D tilt: rail, cards, workflow graph ----------
+  function tilt(el,max,persp){
+    el.style.transform='perspective('+persp+'px)';
+    var cx=0,cy=0,tx=0,ty=0,on=false;
+    el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;tx=(x-.5)*max;ty=(.5-y)*max;on=true;
+      el.style.setProperty('--mx',(x*100)+'%');el.style.setProperty('--my',(y*100)+'%')});
+    el.addEventListener('pointerleave',function(){tx=0;ty=0});
+    (function loop(){cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;el.style.transform='perspective('+persp+'px) rotateX('+cy.toFixed(2)+'deg) rotateY('+cx.toFixed(2)+'deg)';requestAnimationFrame(loop)})();
+  }
+  if(fine){
+    tilt(document.querySelector('.rail'),10,900);
+    document.querySelectorAll('.card').forEach(function(c){tilt(c,8,800)});
+    tilt(document.querySelector('.graph'),12,1000);
+  }
+
+  // ---------- scroll-linked 3D entrance (content is fully visible at rest) ----------
+  var blocks=[].slice.call(document.querySelectorAll('main > section, .graph, .tl .item'));
+  blocks.forEach(function(b){b.classList.add('d3-in')});
+  function onScroll(){
+    var vh=innerHeight;
+    blocks.forEach(function(b){
+      if(b.matches('.graph')&&fine)return;   // graph tilts with the cursor instead
+      var r=b.getBoundingClientRect(),p=(vh-r.top)/(vh*.45);p=Math.max(0,Math.min(1,p));
+      var e=1-Math.pow(1-p,3);
+      if(b.matches('.tl .item'))b.style.transform='perspective(900px) translateX('+((1-e)*-40)+'px) rotateY('+((1-e)*18)+'deg)';
+      else b.style.transform='perspective(1200px) translateY('+((1-e)*70)+'px) rotateX('+((1-e)*16)+'deg) scale('+(0.94+e*.06)+')';
+    });
+  }
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+})();
+</script>
+
+</body>
+</html>
