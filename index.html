@@ -1,320 +1,455 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Geethanjali Pulagam · Gold 3D</title>
-<meta name="description" content="Geethanjali Pulagam - Commercial Agent - Europe (AI Research &amp; Automation). International crop protection sales and AI automation.">
-<style>body{margin:0}img{max-width:100%}</style>
-
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geethanjali Pulagam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-/* Layout: dark-first; a sticky profile rail on the left, content on the right; workflow "nodes" as the signature motif */
+/* Layout: fixed full-screen 3D canvas (stars, grid floor, one shape per step); seven full-height "workflow steps" with a glass card that alternates sides */
 :root{
-  --bg:#0f1420; --panel:#161d2d; --panel2:#1c2538; --fg:#eef1f7; --muted:#9aa5bb; --line:#27324a;
-  --accent:#f2b544; --accent2:#7cc7ff; --accent-soft:rgba(242,181,68,.12);
-  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --bg:#0A110E; --bg-2:#0F1813; --card:rgba(13,21,17,.82); --line:#1F2E26; --line-2:#2C4034;
+  --fg:#EAF1EC; --muted:#93A399; --lime:#C9F26B; --cyan:#86E8DA; --amber:#E9AE4E;
+  --display:"Sora","Segoe UI",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   color-scheme:dark;
 }
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
-  --bg:#f6f4ef; --panel:#ffffff; --panel2:#f0ede5; --fg:#151a26; --muted:#5b6476; --line:#e0dbcf;
-  --accent:#b9770e; --accent2:#1f6fb2; --accent-soft:rgba(185,119,14,.10); color-scheme:light}}
-:root[data-theme="light"]{
-  --bg:#f6f4ef; --panel:#ffffff; --panel2:#f0ede5; --fg:#151a26; --muted:#5b6476; --line:#e0dbcf;
-  --accent:#b9770e; --accent2:#1f6fb2; --accent-soft:rgba(185,119,14,.10); color-scheme:light}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--body);
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.shell{max-width:1120px;margin:0 auto;padding-block:40px 64px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;align-items:start}
-h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
-p{margin:0}
-a{color:var(--accent2)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-.tag{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-weight:300;font-size:17px;line-height:1.6;margin:0;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+a{color:inherit}
+.mono{font-family:var(--mono);font-weight:400}
 
-/* rail */
-.rail{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:18px}
-.avatar{width:120px;aspect-ratio:1;border-radius:22px;overflow:hidden;border:2px solid var(--accent);max-width:100%}
-.avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.rail h1{font-size:2rem;font-weight:800;letter-spacing:-.01em}
-.rail .role{color:var(--muted);font-size:.95rem}
-.status{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);color:var(--fg);background:var(--accent-soft);padding:8px 10px;border-radius:999px;width:max-content}
-.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:.9rem;color:var(--muted)}
-.facts b{color:var(--fg);font-weight:500}
-.contact{display:flex;flex-direction:column;gap:8px}
-.email{font:500 13px/1.3 var(--mono);user-select:all;padding:10px 12px;border:1px dashed var(--line);border-radius:10px;word-break:break-all}
-.btns{display:flex;gap:8px;flex-wrap:wrap}
-.btn{font:600 14px/1 var(--body);padding:11px 14px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#1a1405;cursor:pointer;text-decoration:none}
-.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-block:14px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
+  background:rgba(10,17,14,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:15px;text-decoration:none}
+.logo{width:36px;height:36px;border:1.5px solid var(--lime);border-radius:8px;display:grid;place-items:center;color:var(--lime);font-family:var(--mono);font-weight:700;font-size:14px}
+.status{font-family:var(--mono);font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.status .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(201,242,107,.15);animation:blink 1.6s infinite}
+.status b{color:var(--lime);font-weight:500}
+@keyframes blink{50%{opacity:.35}}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:500;font-size:15px;padding:12px 20px;border-radius:9px;border:1px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;text-decoration:none;transition:transform .15s, background .15s, border-color .15s}
+.btn:hover{border-color:var(--lime)}
+.btn:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.btn.primary{background:var(--lime);color:#10180F;border-color:var(--lime)}
+.btn.primary:hover{transform:translateY(-1px)}
+.top .btn{padding:9px 16px;font-size:14px}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--lime))}
 
-/* main */
-main{display:flex;flex-direction:column;gap:56px;min-width:0}
-.hero{display:flex;flex-direction:column;gap:18px}
-.hero h2{font-size:clamp(2.2rem,5.2vw,3.8rem);font-weight:800;letter-spacing:-.02em}
-.hero h2 em{font-style:normal;color:var(--accent)}
-.hero p{color:var(--muted);max-width:60ch;font-size:1.05rem}
+/* step rail */
+.rail{position:fixed;right:max(18px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:18px;align-items:flex-end}
+.rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--lime)}
+.rail button span{opacity:0;transition:opacity .2s}
+.rail button i{width:10px;height:10px;border-radius:3px;border:1.5px solid var(--muted);display:block;transition:all .2s}
+.rail button.done i{background:#557a3a;border-color:#557a3a}
+.rail button.on i{width:14px;height:14px;border-radius:50%;background:var(--lime);border-color:var(--lime);box-shadow:0 0 12px rgba(201,242,107,.6)}
+.rail button.on span,.rail button:hover span,.rail button:focus-visible span{opacity:1}
 
-/* workflow graph */
-.graph{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;overflow-x:auto}
-.graph svg{display:block;width:100%;min-width:560px;height:auto}
-.graph .cap{font:400 12px/1.4 var(--mono);color:var(--muted);margin-top:10px}
+/* steps */
+main{position:relative;z-index:10}
+.step{min-height:100vh;display:flex;align-items:center;padding-block:96px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(64px,env(safe-area-inset-right,0px))}
+.inner{width:100%;max-width:1240px;margin:0 auto;display:flex}
+.step.right .inner{justify-content:flex-end}
+.card{width:min(620px,100%);background:var(--card);border:1px solid var(--line-2);border-radius:22px;padding:40px 42px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);min-width:0}
+.eyebrow{font-family:var(--mono);font-size:14px;letter-spacing:.14em;color:var(--lime);display:flex;align-items:center;gap:12px;margin-bottom:14px;text-transform:uppercase}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--lime)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;font-weight:600}
+h2{font-size:clamp(30px,3.4vw,44px);line-height:1.15;margin-bottom:18px}
+h3{font-size:22px;font-weight:600}
+.lead{color:var(--muted);font-size:clamp(18px,1.6vw,22px);line-height:1.65;max-width:34ch}
+p{margin:0 0 14px}
+.muted{color:var(--muted)}
+strong{color:var(--fg);font-weight:600}
 
-section{display:flex;flex-direction:column;gap:20px}
-section>h3{font-size:1.6rem;font-weight:700}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.card h4{font:700 1.05rem/1.25 var(--display);margin:0}
-.card p{color:var(--muted);font-size:.93rem}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.chip{font:400 12px/1 var(--mono);padding:7px 9px;border-radius:8px;background:var(--panel2);border:1px solid var(--line)}
+/* hero */
+.hero .card{background:none;border:0;padding:0;backdrop-filter:none;-webkit-backdrop-filter:none;width:min(720px,100%)}
+.hero h1{font-size:clamp(52px,8.2vw,112px);line-height:.98;letter-spacing:-.02em;font-weight:700;margin-bottom:22px}
+.hero h1 span{display:block;color:var(--lime)}
+.role{font-family:var(--mono);color:var(--cyan);font-size:clamp(15px,1.4vw,19px);margin-bottom:20px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.hint{margin-top:56px;font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.hint b{color:var(--lime);font-weight:400}
 
-.stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.stack .card h4{font-size:.95rem;font-family:var(--mono);font-weight:500;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.tiles.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{font-size:15px;line-height:1.5}
+.tile{border:1px solid var(--line-2);border-radius:12px;padding:16px 18px;min-width:0}
+.tile small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
 
-.tl{display:flex;flex-direction:column;gap:14px}
-.item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
-.when{font:500 12px/1.5 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
-.when b{display:block;color:var(--accent);font-weight:500}
-.item h4{font:700 1.1rem/1.25 var(--display);margin:0}
-.item .org{color:var(--muted);font-size:.92rem;margin-top:2px}
-.item ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:.94rem}
+/* entries */
+.entry{padding-block:20px;border-top:1px solid var(--line-2)}
+.entry:first-of-type{border-top:0;padding-top:4px}
+.meta{font-family:var(--mono);font-size:14px;color:var(--cyan);margin:6px 0 10px;line-height:1.6}
+.list{list-style:none;margin:0;padding:0}
+.list li{position:relative;padding-left:24px;margin:8px 0;color:#C3CFC7}
+.list li::before{content:"›";position:absolute;left:4px;top:-1px;color:var(--lime);font-family:var(--mono)}
+.metric{margin-top:16px;border:1px dashed var(--line-2);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.metric b{font-family:var(--mono);font-size:clamp(22px,2.4vw,30px);color:var(--amber);font-weight:500;white-space:nowrap}
+.metric span{font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--fg);max-width:24ch}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.stack span{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:3px 9px}
 
-footer{color:var(--muted);font:400 12px/1 var(--mono)}
+/* chips */
+.group{margin-top:20px}
+.group small{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{border:1px solid var(--line-2);border-radius:9px;padding:8px 15px;font-size:16px;font-weight:400}
+.chips.hot span{background:rgba(201,242,107,.07);border-color:#3a5230}
+
+/* contact */
+.email{display:inline-block;font-size:clamp(16px,4.6vw,30px);font-weight:600;color:var(--lime);border-bottom:1px solid var(--lime);padding-bottom:4px;overflow-wrap:anywhere;margin:8px 0 6px;background:none;border-top:0;border-left:0;border-right:0;cursor:pointer;font-family:var(--display);text-align:left}
+.phone{font-family:var(--mono);color:var(--fg);font-size:17px;margin-top:10px;display:block;background:none;border:0;padding:0;cursor:pointer}
+.sign{margin-top:28px;font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.04em}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;background:var(--lime);color:#10180F;font-family:var(--mono);font-size:14px;padding:9px 16px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.on{opacity:1}
 
 @media (max-width:900px){
-  .shell{grid-template-columns:1fr;gap:28px;padding-block:24px 48px}
-  .rail{position:static}
-  .grid3{grid-template-columns:1fr}
+  .tiles.three{grid-template-columns:1fr}
+  .status .long{display:none}
+  .step{padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:72px;min-height:auto}
+  .step:first-of-type{min-height:100vh;align-items:flex-end;padding-bottom:56px}
+  .step.right .inner{justify-content:flex-start}
+  .card{background:rgba(13,21,17,.9);padding:28px 22px}
+  .rail{display:none}
+  .step{padding-top:46vh}
+  .step:first-of-type{padding-top:50vh}
 }
 @media (max-width:560px){
-  .stack{grid-template-columns:1fr}
-  .item{grid-template-columns:1fr;gap:8px}
+  .status{display:none}
+  .tiles,.tiles.three{grid-template-columns:1fr}
+  .brand .name{display:none}
 }
-@media (prefers-reduced-motion:no-preference){
-  .flow-dot{animation:move 3.2s linear infinite}
-  @keyframes move{from{offset-distance:0%}to{offset-distance:100%}}
-}
-
-/* ---------- 3D LAYER ---------- */
-html,body{overflow-x:clip}
-.nb{white-space:nowrap}
-.hero,.hero p,.hero h2{text-align:left}
-.hero p{max-width:62ch;text-wrap:pretty}
-.hero p{text-shadow:0 1px 12px var(--bg),0 0 2px var(--bg)}
-#space{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
-.shell{position:relative;z-index:1}
-.rail,.card,.graph{transform-style:preserve-3d;will-change:transform}
-.rail{box-shadow:0 40px 80px -40px rgba(0,0,0,.55)}
-.rail .avatar{transform:translateZ(40px);box-shadow:0 18px 30px -12px rgba(0,0,0,.5)}
-.rail h1{transform:translateZ(28px)}
-.rail .status,.rail .btns{transform:translateZ(18px)}
-.rail h1{text-shadow:1px 1px 0 var(--line),2px 2px 0 var(--line),3px 3px 0 var(--line),4px 4px 0 var(--line),6px 8px 14px rgba(0,0,0,.35)}
-.hero h2 em{text-shadow:1px 1px 0 color-mix(in srgb,var(--accent) 55%,var(--bg)),2px 2px 0 color-mix(in srgb,var(--accent) 45%,var(--bg)),3px 3px 0 color-mix(in srgb,var(--accent) 35%,var(--bg)),4px 4px 0 color-mix(in srgb,var(--accent) 25%,var(--bg)),6px 10px 18px rgba(0,0,0,.3)}
-.card{position:relative;overflow:hidden}
-.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),var(--accent-soft),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
-.card:hover::after{opacity:1}
-.card h4{transform:translateZ(22px)}
-.graph svg rect{transition:transform .4s}
-.graph .flow{stroke-dasharray:5 6;animation:dash 1.2s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-22}}
-.tl .item{transform-style:preserve-3d}
-.d3-in{transform-origin:50% 0%}
-@media (prefers-reduced-motion:reduce){.graph .flow{animation:none}}
 </style>
-</head>
-<body>
 
+</head><body>
+<canvas id="scene" aria-hidden="true"></canvas>
 
-<canvas id="space" aria-hidden="true"></canvas>
-<div class="shell">
-  <aside class="rail">
-    <div class="avatar"><img src="data:image/jpeg;base64,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" alt="Geethanjali Pulagam"></div>
-    <div>
-      <span class="tag">Portfolio</span>
-      <h1>Geethanjali Pulagam</h1>
-      <p class="role">Commercial Agent – Europe (AI Research &amp; Automation) at <span class="nb">Sharda Cropchem Ltd</span></p>
-    </div>
-    <span class="status">Spain · Remote</span>
-    <ul class="facts">
-      <li><b>Focus</b> · International crop protection sales, AI automation</li>
-      <li><b>Tools</b> · n8n, Power Automate, Python</li>
-      <li><b>Education</b> · MBA, B.Sc. Computer Applications</li>
-    </ul>
-    <div class="contact">
-      <span class="email" id="email">pulagamgeethanjali@gmail.com</span>
-      <div class="btns">
-        <button class="btn" id="copy" type="button">Copy email</button>
-        <a class="btn ghost" href="https://www.linkedin.com/in/geethanjali-pulagam/" target="_blank" rel="noopener">LinkedIn</a>
+<header class="top">
+  <a class="brand" href="#trigger"><span class="logo">GP</span><span class="name">geethanjali pulagam</span></a>
+  <div class="status" aria-live="polite"><span class="dot"></span><span class="long">workflow running ·</span> step <b id="sNum">01</b> /07 · <b id="sName">TRIGGER</b></div>
+  <a class="btn primary" href="#output">Contact</a>
+  <div class="progress" id="progress"></div>
+</header>
+
+<nav class="rail" id="rail" aria-label="Sections"></nav>
+
+<main>
+  <!-- 01 -->
+  <section class="step hero" id="trigger" data-name="TRIGGER">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">01 · Trigger</div>
+      <h1>Geethanjali <span>Pulagam</span></h1>
+      <div class="role">MBA, Marketing &amp; Technopreneurship · AI Agents &amp; Workflow Automation · Generative AI · Sales</div>
+      <p class="lead">Lisbon, Portugal · Nationality: Indian</p>
+      <div class="actions">
+        <a class="btn primary" href="#input">▶ Run the workflow</a>
+        <a class="btn" href="#output">Skip to contact</a>
       </div>
-    </div>
-  </aside>
+      <div class="hint">Scroll to execute each step <b>↓</b></div>
+    </div></div>
+  </section>
 
-  <main>
-    <header class="hero">
-      <span class="tag">Crop protection · AI automation</span>
-      <h2>Commercial work in crop protection, <em>powered by AI.</em></h2>
-      <p>As Commercial Agent – Europe (AI Research &amp; Automation) for <span class="nb">Sharda Cropchem Ltd</span>, I support the commercialisation of a crop protection portfolio across Europe, and I build AI agents and automated workflows with n8n, Microsoft Power Automate and Python that make commercial and reporting work faster.</p>
-    </header>
-
-    <div class="graph" aria-label="How an automation I build runs, from trigger to result">
-      <svg viewBox="0 0 760 170" role="img">
-        <defs>
-          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
-        </defs>
-        <g font-family="IBM Plex Mono, monospace" font-size="12">
-          <g><rect x="10" y="55" width="120" height="60" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="70" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">Trigger</text><text x="70" y="100" text-anchor="middle" fill="var(--muted)">new task</text></g>
-          <g><rect x="160" y="55" width="130" height="60" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="225" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">n8n / Power</text><text x="225" y="100" text-anchor="middle" fill="var(--muted)">Automate flow</text></g>
-          <g><rect x="320" y="20" width="130" height="56" rx="12" fill="var(--panel2)" stroke="var(--accent2)"/><text x="385" y="45" text-anchor="middle" fill="var(--fg)" font-weight="500">AI agent</text><text x="385" y="62" text-anchor="middle" fill="var(--muted)">Claude · Copilot</text></g>
-          <g><rect x="320" y="96" width="130" height="56" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="385" y="121" text-anchor="middle" fill="var(--fg)" font-weight="500">Python</text><text x="385" y="138" text-anchor="middle" fill="var(--muted)">data step</text></g>
-          <g><rect x="480" y="55" width="120" height="60" rx="12" fill="var(--accent-soft)" stroke="var(--accent)"/><text x="540" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">QA check</text><text x="540" y="100" text-anchor="middle" fill="var(--muted)">vs requirements</text></g>
-          <g><rect x="630" y="55" width="120" height="60" rx="12" fill="var(--panel2)" stroke="var(--line)"/><text x="690" y="82" text-anchor="middle" fill="var(--fg)" font-weight="500">Result</text><text x="690" y="100" text-anchor="middle" fill="var(--muted)">ready to use</text></g>
-          <g class="flows" stroke="var(--muted)" stroke-width="1.5" fill="none" marker-end="url(#ar)">
-            <path class="flow" d="M130 85 H158"/>
-            <path class="flow" d="M290 78 C305 78 305 48 318 48"/>
-            <path class="flow" d="M290 92 C305 92 305 124 318 124"/>
-            <path class="flow" d="M450 48 C465 48 465 78 478 78"/>
-            <path class="flow" d="M450 124 C465 124 465 92 478 92"/>
-            <path class="flow" d="M600 85 H628"/>
-          </g><g class="dots"><circle r="3.5" fill="var(--accent)"><animateMotion dur="1.60s" begin="0.00s" repeatCount="indefinite" path="M130 85 H158"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="1.75s" begin="0.35s" repeatCount="indefinite" path="M290 78 C305 78 305 48 318 48"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="1.90s" begin="0.70s" repeatCount="indefinite" path="M290 92 C305 92 305 124 318 124"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="2.05s" begin="1.05s" repeatCount="indefinite" path="M450 48 C465 48 465 78 478 78"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="2.20s" begin="1.40s" repeatCount="indefinite" path="M450 124 C465 124 465 92 478 92"/></circle><circle r="3.5" fill="var(--accent)"><animateMotion dur="2.35s" begin="1.75s" repeatCount="indefinite" path="M600 85 H628"/></circle></g>
-        </g>
-      </svg>
-      <p class="cap">A typical flow: a workflow tool runs AI and Python steps, and nothing ships until the QA check passes.</p>
-    </div>
-
-    <section>
-      <span class="tag">What I do</span>
-      <h3>What I bring to a team</h3>
-      <div class="grid3">
-        <article class="card"><h4>Workflow automation</h4><p>Turning repetitive, multi-step tasks into automated workflows that connect tools, data and AI steps.</p><div class="chips"><span class="chip">n8n</span><span class="chip">Power Automate</span><span class="chip">Python</span></div></article>
-        <article class="card"><h4>Generative AI &amp; prompts</h4><p>Designing and testing prompts until AI outputs are accurate, consistent and ready for business use.</p><div class="chips"><span class="chip">Claude AI</span><span class="chip">Copilot</span><span class="chip">Perplexity AI</span><span class="chip">Google Search</span><span class="chip">Wikipedia</span><span class="chip">AI agents</span></div></article>
-        <article class="card"><h4>Commercial &amp; business development</h4><p>Supporting sales of a crop protection portfolio across Europe: customers, orders, budgets and work plans.</p><div class="chips"><span class="chip">International sales</span><span class="chip">Business development</span><span class="chip">Crop protection</span><span class="chip">Europe</span></div></article>
+  <!-- 02 -->
+  <section class="step right" id="input" data-name="INPUT">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">02 · Input</div>
+      <h2>Professional summary</h2>
+      <p class="muted">MBA graduate in Marketing and Technopreneurship with a B.Sc. in Computer Applications, bringing a rare mix of business sense and hands-on technical skill. Builds AI agents and automated workflows with n8n, Microsoft Power Automate and Python, and uses generative AI and prompt engineering to make research, reporting and documentation faster and more accurate. Customer-facing sales experience and a web development background. Based in Lisbon and open to roles in international, remote and distributed teams.</p>
+      <div class="tiles three">
+        <div class="tile"><small>Business + Technology</small>MBA in Marketing paired with a Computer Applications degree</div>
+        <div class="tile"><small>AI &amp; Automation</small>Builds AI agents and no-code / Python workflows that cut manual work</div>
+        <div class="tile"><small>Customer-facing</small>Sales, customer service and clear communication with teams</div>
       </div>
-    </section>
+    </div></div>
+  </section>
 
-    <section>
-      <span class="tag">Toolkit</span>
-      <h3>Skills by area</h3>
-      <div class="stack">
-        <div class="card" style="grid-column:1/-1"><h4>Commercial</h4><div class="chips"><span class="chip">International sales</span><span class="chip">Business development</span><span class="chip">Crop protection</span><span class="chip">Customer relationship management</span><span class="chip">European market</span></div></div>
-        <div class="card" style="grid-column:1/-1"><h4>GenAI tools</h4><div class="chips"><span class="chip">Claude AI</span><span class="chip">Microsoft Copilot</span><span class="chip">Perplexity AI</span></div></div>
-        <div class="card"><h4>AI / GenAI</h4><div class="chips"><span class="chip">Generative AI</span><span class="chip">Prompt engineering</span><span class="chip">AI agents</span><span class="chip">Claude AI</span><span class="chip">Microsoft Copilot</span><span class="chip">Perplexity AI (research)</span><span class="chip">Google Search (research)</span><span class="chip">Wikipedia (study &amp; research)</span></div></div>
-        <div class="card"><h4>Digital tools &amp; AI</h4><div class="chips"><span class="chip">n8n</span><span class="chip">Microsoft Power Automate</span><span class="chip">Workflow automation</span></div></div>
-        <div class="card"><h4>Programming &amp; dev tools</h4><div class="chips"><span class="chip">Python</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">VS Code</span><span class="chip">GitHub</span><span class="chip">Linux</span><span class="chip">Linux calculations via Parallels Desktop</span></div></div>
-        <div class="card"><h4>Design &amp; media</h4><div class="chips"><span class="chip">Canva</span><span class="chip">Adobe Express</span><span class="chip">Content creation</span><span class="chip">SEO</span></div></div>
+  <!-- 03 -->
+  <section class="step" id="process" data-name="PROCESS">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">03 · Process</div>
+      <h2>Experience</h2>
+      <div class="entry">
+        <h3>Trent Limited – Westside</h3>
+        <div class="meta">Sales Associate Intern · Feb 2026 – Apr 2026 · Chennai, India</div>
+        <ul class="list">
+          <li>Assisted customers with product selection and delivered quality customer service in a busy retail environment.</li>
+          <li>Supported sales operations, billing and customer engagement activities to improve store performance.</li>
+        </ul>
       </div>
-    </section>
-
-    <section>
-      <span class="tag">Experience</span>
-      <h3>Work and internships</h3>
-      <div class="tl">
-        <div class="item"><div class="when"><b>Now</b>Nov 2026 – Present</div><div><h4>Commercial Agent – Europe (AI Research &amp; Automation)</h4><p class="org">Sharda Cropchem Ltd · Spain (Remote)</p><ul><li>Support commercialisation and sales of a crop protection portfolio across Europe: customer visits, orders, delivery and payment follow-up.</li><li>Contribute to annual budgets and work plans with headquarters and customers.</li><li>Research, design and deliver AI-driven projects independently, significantly reducing turnaround time compared with manual processes.</li><li>Develop AI agents and automated workflows that improve efficiency in commercial and reporting tasks.</li></ul></div></div>
-        <div class="item"><div class="when"><b>Internship</b>Feb – Apr 2026</div><div><h4>Sales Associate Intern</h4><p class="org">Trent Limited (Westside) · Chennai</p><ul><li>Assisted customers and supported sales, billing and customer engagement in retail.</li></ul></div></div>
-        <div class="item"><div class="when"><b>Internship</b>Jan – Apr 2024</div><div><h4>Web Development Intern</h4><p class="org">Academic XCELL Solutions · Andhra Pradesh</p><ul><li>Built responsive webpages with HTML, CSS and JavaScript.</li></ul></div></div>
+      <div class="entry">
+        <h3>Academic XCELL Solutions</h3>
+        <div class="meta">Web Development Intern · Jan 2024 – Apr 2024 · Andhra Pradesh, India</div>
+        <ul class="list">
+          <li>Built responsive webpages with HTML, CSS and JavaScript, learning core front-end development practices.</li>
+          <li>Worked on page layout, styling and basic interactivity, testing pages across screen sizes before delivery.</li>
+        </ul>
       </div>
-    </section>
+    </div></div>
+  </section>
 
-    <section>
-      <span class="tag">Education</span>
-      <h3>Business and technology</h3>
-      <div class="tl">
-        <div class="item"><div class="when"><b>MBA</b>Aug 2024 – May 2026</div><div><h4>Marketing and Technopreneurship</h4><p class="org">Vel Tech University, Chennai · CGPA 8.5 / 10</p></div></div>
-        <div class="item"><div class="when"><b>B.Sc.</b>Aug 2021 – May 2024</div><div><h4>Computer Applications</h4><p class="org">Adikavi Nannaya University, Rajamahendravaram · CGPA 7.89 / 10</p><p class="org">Fields of study: Mathematics and Statistics, Computer Applications</p></div></div>
+  <!-- 04 -->
+  <section class="step right" id="tools" data-name="TOOLS">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">04 · Tools</div>
+      <h2>Skills</h2>
+      <div class="group"><small>AI &amp; GenAI</small><div class="chips hot"><span>Generative AI</span><span>Prompt engineering</span><span>AI agents</span></div></div>
+      <div class="group"><small>Automation</small><div class="chips hot"><span>Workflow automation with n8n and Microsoft Power Automate</span></div></div>
+      <div class="group"><small>Programming</small><div class="chips"><span>Python</span><span>HTML</span><span>CSS</span><span>JavaScript</span></div></div>
+      <div class="group"><small>Tools</small><div class="chips"><span>Visual Studio Code</span><span>GitHub</span><span>Linux (via Parallels Desktop)</span><span>Canva</span><span>Adobe Express</span></div></div>
+      <div class="group"><small>Software testing</small><div class="chips"><span>Test planning</span><span>Test case design</span><span>Manual and automated testing</span><span>Regression testing</span><span>UAT</span></div></div>
+      <div class="group"><small>Business</small><div class="chips"><span>Sales</span><span>Business development</span><span>CRM</span><span>Marketing</span><span>Digital marketing and SEO</span></div></div>
+      <div class="group"><small>Strengths</small><div class="chips"><span>Clear written reporting</span><span>Remote teamwork</span><span>Planning against deadlines</span><span>Attention to detail</span></div></div>
+    </div></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="step" id="training" data-name="TRAINING">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">05 · Training data</div>
+      <h2>Education</h2>
+      <div class="entry">
+        <h3>Vel Tech University</h3>
+        <div class="meta">Chennai, India · Aug 2024 – May 2026</div>
+        <p style="margin:0">Master of Business Administration (MBA) – Marketing and Technopreneurship · <strong>CGPA 8.5 / 10</strong></p>
+        <ul class="list"><li>Focus: marketing strategy, digital marketing, entrepreneurship and technology-led business models</li></ul>
       </div>
-    </section>
+      <div class="entry">
+        <h3>Adikavi Nannaya University</h3>
+        <div class="meta">Rajamahendravaram, India · Aug 2021 – May 2024</div>
+        <p style="margin:0">Bachelor of Science (B.Sc.) – Computer Applications · <strong>CGPA 7.89 / 10</strong></p>
+        <ul class="list"><li>Subjects: Mathematics, Statistics and Computer Applications</li></ul>
+      </div>
+    </div></div>
+  </section>
 
-    <footer>© 2026 Geethanjali Pulagam</footer>
-  </main>
-</div>
+  <!-- 06 -->
+  <section class="step right" id="actions" data-name="ACTIONS">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">06 · Actions</div>
+      <h2>What I have built</h2>
+      <div class="entry">
+        <h3>AI Research &amp; Reporting Workflows</h3>
+        <ul class="list">
+          <li>Designed AI agents and automated workflows that collect information from web sources, organise it and draft structured reports.</li>
+          <li>Kept outputs consistent and traceable, so every report can be checked back to its sources.</li>
+        </ul>
+        <div class="metric"><b>~50% less time</b><span>than the equivalent manual research process</span></div>
+        <div class="stack"><span>n8n</span><span>Power Automate</span><span>Python</span></div>
+      </div>
+      <div class="entry">
+        <h3>Personal Portfolio Website</h3>
+        <ul class="list"><li>Designed, built and published an animated 3D portfolio website from scratch, hosted on GitHub Pages with a custom address.</li></ul>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="step" id="output" data-name="OUTPUT">
+    <div class="inner"><div class="card">
+      <div class="eyebrow">07 · Output</div>
+      <h2>Languages &amp; contact</h2>
+      <div class="tiles">
+        <div class="tile"><small>Telugu</small>Native</div>
+        <div class="tile"><small>English</small>C1 (Proficient)</div>
+      </div>
+      <div style="margin-top:26px">
+        <button class="email" type="button" data-copy="pulagamgeethanjali@gmail.com" id="copy-email">pulagamgeethanjali@gmail.com</button>
+        <button class="phone" type="button" data-copy="+91 90303 93377" id="copy-phone">+91 90303 93377</button>
+        <p class="muted" style="margin-top:10px">Lisbon, Portugal · Nationality: Indian</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" type="button" data-copy="pulagamgeethanjali@gmail.com" id="copy-email-2">Copy email</button>
+        <a class="btn" href="#trigger">↺ Run again</a>
+      </div>
+      <div class="sign">Geethanjali Pulagam · 2026</div>
+    </div></div>
+  </section>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-document.getElementById('copy').addEventListener('click', async function(){
-  const btn=this, el=document.getElementById('email');
-  try{ await navigator.clipboard.writeText(el.textContent); btn.textContent='Copied'; }
-  catch(e){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selected, press Cmd+C'; }
-  setTimeout(()=>{btn.textContent='Copy email'},2200);
-});
-</script>
-
-<script>
+/* ---------- copy ---------- */
 (function(){
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var root=document.documentElement,fine=matchMedia('(pointer:fine)').matches;
-  // ---------- 3D gold globe network behind the page ----------
-  var cv=document.getElementById('space'),ctx=cv.getContext('2d'),W,H,dpr,P=[],E=[],S=[],pulses=[],C={};
-  var mouse={x:.5,y:.5},yaw=0,pitch=0,spin=0;
-  function col(n){return getComputedStyle(root).getPropertyValue(n).trim()}
-  function readC(){C.a=col('--accent');C.b=col('--accent2');C.m=col('--muted')}
-  function build(){
-    dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-    var n=W<760?420:760,ga=Math.PI*(3-Math.sqrt(5));P=[];
-    for(var i=0;i<n;i++){var y=1-(i/(n-1))*2,r=Math.sqrt(1-y*y),t=ga*i;P.push([Math.cos(t)*r,y,Math.sin(t)*r,Math.random()<.07])}
-    // orbit ring (like a satellite path) for extra depth
-    for(var k=0;k<120;k++){var a=k/120*6.283;P.push([Math.cos(a)*1.45,Math.sin(a)*.18,Math.sin(a)*1.45,false,1])}
-    E=[];for(var i2=0;i2<n;i2++)for(var j=i2+1;j<Math.min(n,i2+120);j++){var dx=P[i2][0]-P[j][0],dy=P[i2][1]-P[j][1],dz=P[i2][2]-P[j][2];if(dx*dx+dy*dy+dz*dz<.03)E.push([i2,j])}
-    pulses=[];
-  }
-  readC();build();
-  addEventListener('resize',build);
-  new MutationObserver(readC).observe(root,{attributes:true,attributeFilter:['data-theme']});
-  matchMedia('(prefers-color-scheme: light)').addEventListener('change',readC);
-  addEventListener('pointermove',function(e){mouse.x=e.clientX/innerWidth;mouse.y=e.clientY/innerHeight});
-  function frame(t){
-    t=t||0;var sc=scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight);
-    spin=reduce?0:t*.00012;
-    yaw+=((mouse.x-.5)*.9+spin+sc*3.2-yaw)*.06;pitch+=((mouse.y-.5)*.5+.25-pitch)*.06;
-    var cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
-    var R=Math.min(W,H)*(W<760?.42:.36),ox=W<760?W*.5:W*(.72-sc*.12),oy=H*(.42+sc*.12),f=3;
-    for(var i=0;i<P.length;i++){var p=P[i],x=p[0]*cy-p[2]*sy,z=p[0]*sy+p[2]*cy,y=p[1]*cp-z*sp,z2=p[1]*sp+z*cp,k=f/(f+z2);S[i]=[ox+x*R*k,oy+y*R*k,z2,k]}
-    ctx.clearRect(0,0,W,H);
-    var fade=W<760?.35:.75;
-    ctx.lineWidth=.6;ctx.strokeStyle=C.a;
-    for(var q=0;q<E.length;q++){var A=S[E[q][0]],B=S[E[q][1]],d=(A[2]+B[2])/2;ctx.globalAlpha=Math.max(0,.34-d*.28)*fade;if(ctx.globalAlpha<.02)continue;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke()}
-    if(!reduce&&E.length&&pulses.length<36&&Math.random()<.3)pulses.push({k:(Math.random()*E.length)|0,t:0,s:.02+Math.random()*.03});
-    for(var u=pulses.length-1;u>=0;u--){var pu=pulses[u];pu.t+=pu.s;if(pu.t>=1){pulses.splice(u,1);continue}var A2=S[E[pu.k][0]],B2=S[E[pu.k][1]];if((A2[2]+B2[2])/2>.2)continue;
-      var px=A2[0]+(B2[0]-A2[0])*pu.t,py=A2[1]+(B2[1]-A2[1])*pu.t;ctx.globalAlpha=fade;ctx.fillStyle=C.b;ctx.shadowColor=C.b;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(px,py,2,0,6.283);ctx.fill();ctx.shadowBlur=0}
-    for(var j2=0;j2<P.length;j2++){var s3=S[j2],pp=P[j2];ctx.globalAlpha=Math.max(.05,.8-s3[2]*.45)*fade;ctx.fillStyle=pp[4]?C.b:(pp[3]?C.b:C.a);ctx.beginPath();ctx.arc(s3[0],s3[1],(pp[3]?2.2:1.2)*s3[3]*(pp[4]?.8:1),0,6.283);ctx.fill()}
-    ctx.globalAlpha=1;
-    if(!reduce)requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-  if(reduce)return;
-
-  // ---------- 3D tilt: rail, cards, workflow graph ----------
-  function tilt(el,max,persp){
-    el.style.transform='perspective('+persp+'px)';
-    var cx=0,cy=0,tx=0,ty=0,on=false;
-    el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;tx=(x-.5)*max;ty=(.5-y)*max;on=true;
-      el.style.setProperty('--mx',(x*100)+'%');el.style.setProperty('--my',(y*100)+'%')});
-    el.addEventListener('pointerleave',function(){tx=0;ty=0});
-    (function loop(){cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;el.style.transform='perspective('+persp+'px) rotateX('+cy.toFixed(2)+'deg) rotateY('+cx.toFixed(2)+'deg)';requestAnimationFrame(loop)})();
-  }
-  if(fine){
-    tilt(document.querySelector('.rail'),10,900);
-    document.querySelectorAll('.card').forEach(function(c){tilt(c,8,800)});
-    tilt(document.querySelector('.graph'),12,1000);
-  }
-
-  // ---------- scroll-linked 3D entrance (content is fully visible at rest) ----------
-  var blocks=[].slice.call(document.querySelectorAll('main > section, .graph, .tl .item'));
-  blocks.forEach(function(b){b.classList.add('d3-in')});
-  function onScroll(){
-    var vh=innerHeight;
-    blocks.forEach(function(b){
-      if(b.matches('.graph')&&fine)return;   // graph tilts with the cursor instead
-      var r=b.getBoundingClientRect(),p=(vh-r.top)/(vh*.45);p=Math.max(0,Math.min(1,p));
-      var e=1-Math.pow(1-p,3);
-      if(b.matches('.tl .item'))b.style.transform='perspective(900px) translateX('+((1-e)*-40)+'px) rotateY('+((1-e)*18)+'deg)';
-      else b.style.transform='perspective(1200px) translateY('+((1-e)*70)+'px) rotateX('+((1-e)*16)+'deg) scale('+(0.94+e*.06)+')';
-    });
-  }
-  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+  const toast=document.getElementById('toast');
+  const show=m=>{toast.textContent=m;toast.classList.add('on');clearTimeout(show.t);show.t=setTimeout(()=>toast.classList.remove('on'),1600)};
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+    const t=b.dataset.copy;
+    try{navigator.clipboard.writeText(t).then(()=>show('Copied: '+t),()=>show(t))}catch(e){show(t)}
+  }));
 })();
+
+/* ---------- steps, header, rail ---------- */
+const STEPS=[...document.querySelectorAll('.step')];
+const NAMES=STEPS.map(s=>s.dataset.name);
+const rail=document.getElementById('rail');
+STEPS.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.id='rail-'+s.id;b.setAttribute('aria-label','Go to step '+(i+1)+', '+NAMES[i]);
+  b.innerHTML='<span>'+NAMES[i]+'</span><i></i>';b.onclick=()=>s.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});rail.appendChild(b);});
+let ACTIVE=0;
+function onScroll(){
+  const mid=innerHeight*0.5;let a=0;
+  STEPS.forEach((s,i)=>{if(s.getBoundingClientRect().top<=mid)a=i;});
+  const max=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById('progress').style.width=(max>0?scrollY/max*100:0)+'%';
+  if(a!==ACTIVE||!onScroll.init){ACTIVE=a;onScroll.init=1;
+    document.getElementById('sNum').textContent=String(a+1).padStart(2,'0');
+    document.getElementById('sName').textContent=NAMES[a];
+    [...rail.children].forEach((b,i)=>{b.classList.toggle('on',i===a);b.classList.toggle('done',i<a)});
+    if(window.__scene)window.__scene.go(a);
+  }
+}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);
+
+/* ---------- 3D scene (hand-built renderer on canvas 2D) ---------- */
+(function(){
+  const c=document.getElementById('scene'),x=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,dpr,mobile;
+  function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);mobile=W<900;}
+  size();addEventListener('resize',()=>{size();if(reduce)draw();});
+
+  const hex=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+  const LIME=hex('#C9F26B'),CYAN=hex('#86E8DA'),YEL=hex('#FFF07A'),AMB=hex('#E9AE4E');
+  const rgba=(c,a)=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
+
+  // --- vector helpers
+  const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+  const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],norm=a=>{const l=Math.hypot(a[0],a[1],a[2])||1;return[a[0]/l,a[1]/l,a[2]/l]};
+  function rot(p,ax,ay,az){let [X,Y,Z]=p,s,k,t;
+    s=Math.sin(ax);k=Math.cos(ax);t=Y*k-Z*s;Z=Y*s+Z*k;Y=t;
+    s=Math.sin(ay);k=Math.cos(ay);t=X*k+Z*s;Z=-X*s+Z*k;X=t;
+    s=Math.sin(az);k=Math.cos(az);t=X*k-Y*s;Y=X*s+Y*k;X=t;return[X,Y,Z];}
+
+  // --- meshes: {v:[[x,y,z]], f:[[i..]], ref:(faceIndex)=>point|null}
+  function cube(s){const v=[];for(const a of[-1,1])for(const b of[-1,1])for(const d of[-1,1])v.push([a*s,b*s,d*s]);
+    return{v,f:[[0,1,3,2],[4,6,7,5],[0,4,5,1],[2,3,7,6],[0,2,6,4],[1,5,7,3]]};}
+  function ico(r,sub=0){const t=(1+Math.sqrt(5))/2;let v=[[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],[t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]].map(norm);
+    let f=[[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+    for(let s=0;s<sub;s++){const cache={},nf=[];const mid=(a,b)=>{const k=a<b?a+'_'+b:b+'_'+a;if(cache[k]==null){cache[k]=v.length;v.push(norm([(v[a][0]+v[b][0])/2,(v[a][1]+v[b][1])/2,(v[a][2]+v[b][2])/2]));}return cache[k]};
+      for(const [a,b,cc] of f){const ab=mid(a,b),bc=mid(b,cc),ca=mid(cc,a);nf.push([a,ab,ca],[b,bc,ab],[cc,ca,bc],[ab,bc,ca]);}f=nf;}
+    return{v:v.map(p=>p.map(q=>q*r)),f};}
+  function tube(curve,N,M,r){const v=[],f=[],refs=[];
+    for(let i=0;i<N;i++){const u=i/N,p=curve(u),p2=curve(u+1e-3);const T=norm(sub(p2,p));let Nn=norm(cross(T,[0,0,1]));if(!isFinite(Nn[0])||Math.hypot(...Nn)<.1)Nn=[1,0,0];const B=cross(T,Nn);
+      for(let j=0;j<M;j++){const a=j/M*Math.PI*2,ca=Math.cos(a)*r,sa=Math.sin(a)*r;v.push([p[0]+Nn[0]*ca+B[0]*sa,p[1]+Nn[1]*ca+B[1]*sa,p[2]+Nn[2]*ca+B[2]*sa]);}}
+    for(let i=0;i<N;i++)for(let j=0;j<M;j++){const a=i*M+j,b=i*M+(j+1)%M,cc=((i+1)%N)*M+(j+1)%M,d=((i+1)%N)*M+j;f.push([a,b,cc,d]);refs.push(curve((i+.5)/N));}
+    return{v,f,refs};}
+  const knot=tube(u=>{const t=u*Math.PI*2,p=2,q=3,rr=Math.cos(q*t)+2;return[rr*Math.cos(p*t)*.42,rr*Math.sin(p*t)*.42,-Math.sin(q*t)*.42]},110,9,0.26);
+  const disc=tube(u=>{const t=u*Math.PI*2;return[Math.cos(t)*0.95,Math.sin(t)*0.95,0]},40,12,0.55);
+  const MESH=[
+    {m:cube(.95),col:LIME,ring:LIME,spin:[.2,.5,.1]},
+    {m:ico(1.25),col:CYAN,ring:CYAN,spin:[.3,.4,0]},
+    {m:knot,col:YEL,ring:AMB,spin:[.15,.35,.1]},
+    {m:ico(1.2,1),col:LIME,ring:LIME,spin:[.25,.3,.05],facet:true},
+    {m:cube(1.0),col:CYAN,ring:CYAN,spin:[.35,.45,.1]},
+    {m:disc,col:YEL,ring:AMB,spin:[.6,.25,.3]},
+    {m:ico(1.25,1),col:LIME,ring:LIME,spin:[.2,.35,.1]}
+  ];
+  MESH.forEach(o=>{if(!o.m.refs)o.m.refs=null;});
+  const NAMES2=['TRIGGER','INPUT','PROCESS','TOOLS','TRAINING','ACTIONS','OUTPUT'];
+
+  // stars
+  const stars=[...Array(170)].map(()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6}));
+
+  let cur=0,prev=0,trans=1,camF=560,tm=0,mx=0,my=0,smx=0,smy=0;
+  let posX=0.72,targetX=0.72;
+  const L=norm([0.45,0.65,0.7]);
+  addEventListener('pointermove',e=>{mx=e.clientX/W-.5;my=e.clientY/H-.5;},{passive:true});
+
+  function side(i){return mobile?0.5:(i%2===0?0.72:0.3)}
+  function go(i){if(i===cur)return;prev=cur;cur=i;trans=0;targetX=side(i);if(reduce){trans=1;posX=targetX;draw();}}
+  window.__scene={go};
+
+  function project(p,cx,cy,sc){const z=6.2-p[2];const s=camF*sc/z;return[cx+p[0]*s,cy-p[1]*s,p[2]];}
+
+  function drawGrid(){
+    const hz=H*0.6,vx=W*0.5;x.lineWidth=1;
+    for(let i=-26;i<=26;i++){x.strokeStyle='rgba(120,170,130,'+(0.07)+')';x.beginPath();x.moveTo(vx+i*14,hz);x.lineTo(vx+i*W*0.16,H);x.stroke();}
+    const off=(tm*0.4)%1;
+    for(let k=0;k<16;k++){const t=(k+off)/16;const y=hz+(H-hz)*t*t;x.strokeStyle='rgba(120,170,130,'+(0.03+0.07*t)+')';x.beginPath();x.moveTo(0,y);x.lineTo(W,y);x.stroke();}
+    const g=x.createRadialGradient(W*0.2,H*0.85,0,W*0.2,H*0.85,W*0.6);g.addColorStop(0,'rgba(40,90,60,.18)');g.addColorStop(1,'rgba(10,17,14,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+  }
+
+  function ring(R,tilt,cx,cy,sc,col,alpha,front,spinA){
+    x.strokeStyle=rgba(col,alpha);x.lineWidth=2;x.beginPath();let pen=false;
+    for(let a=0;a<=96;a++){const th=a/96*Math.PI*2;let p=rot([Math.cos(th)*R,0,Math.sin(th)*R],tilt[0],tilt[1]+spinA,tilt[2]);
+      const q=project(p,cx,cy,sc);const isFront=q[2]>=0;
+      if(isFront===front){pen?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]);pen=true;}else pen=false;}
+    x.stroke();
+  }
+
+  function drawMesh(o,ax,ay,az,cx,cy,sc){
+    const m=o.m;const V=m.v.map(p=>rot(p,ax,ay,az));const P=V.map(p=>project(p,cx,cy,sc));
+    const faces=[];
+    m.f.forEach((f,fi)=>{
+      const a=V[f[0]],b=V[f[1]],cc=V[f[2]];let n=norm(cross(sub(b,a),sub(cc,a)));
+      const cen=[0,0,0];f.forEach(i=>{cen[0]+=V[i][0];cen[1]+=V[i][1];cen[2]+=V[i][2]});cen[0]/=f.length;cen[1]/=f.length;cen[2]/=f.length;
+      let ref=[0,0,0];if(m.refs)ref=rot(m.refs[fi],ax,ay,az);
+      if(dot(n,sub(cen,ref))<0)n=[-n[0],-n[1],-n[2]];
+      faces.push({f,z:cen[2],n});
+    });
+    faces.sort((p,q)=>p.z-q.z);
+    for(const F of faces){
+      if(!m.refs&&F.n[2]<-0.02)continue;
+      const l=Math.max(0,dot(F.n,L));const spec=Math.pow(Math.max(0,dot(F.n,norm([L[0],L[1],L[2]+1]))),18);
+      const k=0.42+0.75*l;let r=o.col[0]*k+255*spec*0.8,g=o.col[1]*k+255*spec*0.8,b=o.col[2]*k+255*spec*0.8;
+      const fill=`rgb(${Math.min(255,r)|0},${Math.min(255,g)|0},${Math.min(255,b)|0})`;
+      x.fillStyle=fill;x.strokeStyle=fill;x.lineWidth=.6;x.beginPath();
+      F.f.forEach((i,j)=>j?x.lineTo(P[i][0],P[i][1]):x.moveTo(P[i][0],P[i][1]));x.closePath();x.fill();x.stroke();
+    }
+  }
+
+  function draw(){
+    tm+=reduce?0:1/60;
+    smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
+    if(trans<1)trans=Math.min(1,trans+(reduce?1:0.035));
+    posX+=(targetX-posX)*(reduce?1:0.06);
+    x.fillStyle='#0A110E';x.fillRect(0,0,W,H);
+    // stars
+    for(const s of stars){const tw=.45+.55*Math.sin(tm*1.5+s.p);x.fillStyle='rgba(220,240,225,'+(0.25+0.45*tw)+')';x.fillRect(s.x*W,((s.y*H)-scrollY*0.04*s.r+H*10)%H,s.r,s.r);}
+    drawGrid();
+
+    const cx=W*posX,cy=mobile?H*0.27:H*0.56;
+    const base=Math.min(W*(mobile?0.085:0.08),H*(mobile?0.1:0.105));
+    camF=base*6.2;
+    const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+    const e=ease(trans);
+    const show=[];if(trans<1)show.push({i:prev,s:1-e});show.push({i:cur,s:Math.max(.001,e)});
+
+    // big label
+    x.font='700 '+Math.round(Math.max(20,Math.min(40,W*0.022)))+'px "JetBrains Mono", ui-monospace, monospace';
+    x.textAlign='center';x.fillStyle=rgba(LIME,0.9*e);
+    x.fillText(String(cur+1).padStart(2,'0')+'  ·  '+NAMES2[cur],cx,cy-base*3.2);
+
+    for(const {i,s} of show){
+      const o=MESH[i],sc=s;
+      const ax=tm*o.spin[0]+smy*0.6,ay=tm*o.spin[1]+smx*0.8,az=tm*o.spin[2];
+      const tilt1=[1.25,0,0.35],tilt2=[0.1,0,1.2];
+      // glow
+      const g=x.createRadialGradient(cx,cy,0,cx,cy,base*3.2*sc);g.addColorStop(0,rgba(o.col,.18));g.addColorStop(1,rgba(o.col,0));x.fillStyle=g;x.beginPath();x.arc(cx,cy,base*3.2*sc,0,7);x.fill();
+      ring(2.35,tilt1,cx,cy,sc,o.ring,.75*s,false,tm*.15);ring(2.05,tilt2,cx,cy,sc,o.ring,.6*s,false,-tm*.1);
+      // data pipe with packets (toward the card side)
+      const dir=(mobile||i===0)?0:(posX>0.5?-1:1);
+      if(dir){const x1=cx+dir*base*0.6,x2=cx+dir*W*0.45,yy=cy+base*0.35;
+        x.strokeStyle=rgba(LIME,.45*s);x.lineWidth=3;x.beginPath();x.moveTo(x1,yy);x.lineTo(x2,yy+base*0.5);x.stroke();
+        for(let k=0;k<3;k++){const u=((tm*0.25)+k/3)%1;x.fillStyle=rgba(AMB,s);x.beginPath();x.arc(x1+(x2-x1)*u,yy+base*0.5*u,4,0,7);x.fill();}}
+      // satellite + next-step label
+      if(i<6){const a=tm*0.5+i;let p=rot([Math.cos(a)*2.35,0,Math.sin(a)*2.35],tilt1[0],tm*.15,tilt1[2]);const q=project(p,cx,cy,sc);
+        x.fillStyle=rgba(AMB,.95*s);x.beginPath();x.arc(q[0],q[1],Math.max(2,base*0.11*sc),0,7);x.fill();
+        x.font='500 11px "JetBrains Mono", ui-monospace, monospace';x.fillStyle=rgba(LIME,.75*s);x.textAlign='left';
+        x.fillText(String(i+2).padStart(2,'0')+' · '+NAMES2[i+1],q[0]+10,q[1]-10);}
+      drawMesh(o,ax,ay,az,cx,cy,sc);
+      ring(2.35,tilt1,cx,cy,sc,o.ring,.85*s,true,tm*.15);ring(2.05,tilt2,cx,cy,sc,o.ring,.7*s,true,-tm*.1);
+    }
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  posX=targetX=side(0);
+  draw();
+  addEventListener('resize',()=>{targetX=side(cur);});
+})();
+onScroll();
 </script>
 
-</body>
-</html>
+</body></html>
